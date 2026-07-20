@@ -1,0 +1,9 @@
+langchain
+langgraph
+langchain-openai
+langchain-tavily
+langchain-core
+langchain-huggingface
+sentence-transformers
+python-dotenv
+pydantic
