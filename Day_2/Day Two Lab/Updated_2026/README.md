@@ -60,10 +60,16 @@ For the LLM, any OpenAI-compatible free tier works. Create `.env`:
 ```env
 TAVILY_API_KEY=tvly-...
 
-# Groq (free, fast Llama — console.groq.com):
-OPENAI_API_KEY=gsk_...
-LLM_BASE_URL=https://api.groq.com/openai/v1
-LLM_MODEL=llama-3.3-70b-versatile
+# OpenRouter (free NVIDIA Nemotron — openrouter.ai/keys):
+OPENAI_API_KEY=sk-or-...
+LLM_BASE_URL=https://openrouter.ai/api/v1
+LLM_MODEL=nvidia/nemotron-3-super-120b-a12b:free
+# rate-limited? try: nvidia/nemotron-3-nano-30b-a3b:free
+
+# Or Groq (free, fast Llama — console.groq.com):
+# OPENAI_API_KEY=gsk_...
+# LLM_BASE_URL=https://api.groq.com/openai/v1
+# LLM_MODEL=llama-3.3-70b-versatile
 
 # Or Google AI Studio (free, ~1500 req/day — aistudio.google.com):
 # OPENAI_API_KEY=AIza...

@@ -82,6 +82,47 @@ class AgentState(TypedDict):
 #   search_tool  = TavilySearch(max_results=5)   # langchain_tavily!
 #   vector_store = a Chroma or InMemoryVectorStore with OpenAIEmbeddings
 #
+# ------------------------------------------------------------
+# USING OPENROUTER (free models — recommended for this course)
+# ------------------------------------------------------------
+# OpenRouter is OpenAI-compatible, so ChatOpenAI works as-is —
+# you only change the key, the base_url, and the model name.
+#
+# 1. Get a key at https://openrouter.ai/keys  (starts with sk-or-)
+# 2. Put in your .env:
+#        OPENAI_API_KEY=sk-or-...
+# 3. Create the model like this:
+#
+#    llm = ChatOpenAI(
+#        model="nvidia/nemotron-3-super-120b-a12b:free",
+#        temperature=0,
+#        base_url="https://openrouter.ai/api/v1",
+#    )
+#
+# Free NVIDIA Nemotron models (the ":free" suffix is REQUIRED —
+# without it you'll be billed):
+#   nvidia/nemotron-3-super-120b-a12b:free   <- use this one
+#   nvidia/nemotron-3-nano-30b-a3b:free      <- fallback if rate-limited
+#   nvidia/nemotron-3-ultra-550b-a55b:free   <- biggest, often congested
+# Full list: https://openrouter.ai/collections/free-models
+#
+# KNOW THE LIMITS: free models are rate-limited (~20 req/min and a
+# small daily cap). This lab makes ~5-10 LLM calls per run, so you
+# have plenty — but don't run it in a tight loop, and if you get
+# HTTP 429, wait a minute or switch to the nano model.
+#
+# CAVEAT for Step 3: with_structured_output() needs tool/function
+# calling. Nemotron supports it, but if a free model ever returns
+# an error there, either (a) try another :free model, or (b) pass
+# method="json_schema" to with_structured_output.
+#
+# NOTE: OpenRouter has NO embeddings endpoint. For the vector store
+# use InMemoryVectorStore + local HuggingFaceEmbeddings
+# (pip install langchain-huggingface sentence-transformers), or run
+# USE_FAKE-style DeterministicFakeEmbedding — embeddings only power
+# the memory-retrieval bonus, not the core graph.
+# ------------------------------------------------------------
+#
 # GOTCHA: the old imports you'll find in 2023-24 tutorials
 # (langchain.vectorstores, langchain_community.tools.tavily_search)
 # are DEAD. Current homes:
