@@ -1,5 +1,5 @@
-langchain
-langgraph
 langchain-openai
-tavily-python
+langgraph
 python-dotenv
+fastapi
+uvicorn

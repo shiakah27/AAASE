@@ -1,0 +1,11 @@
+services:
+  agent:
+    build: .
+    env_file:
+      - .env
+    environment:
+      - MOCK=${MOCK:-1}
+      - LAB_STAGE=${LAB_STAGE:-0}
+      - TOPIC=${TOPIC:-}
+    ports:
+      - "8000:8000"
